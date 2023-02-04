@@ -1,47 +1,26 @@
 'use strict';
 
-console.log('JavaScript ve stránce funguje');
+console.log('JavaScript ve stránce funguje!');
 
+const Movie = ({id, title, url, posterUrl, genres, year }) => {
+    return `
+        <div class="movie">
+            <img class="movie__img" src="${posterUrl}" alt="${title}">
+            <h2 class="movie__title"> <a href="${url}"> ${title} </a></h2>
+            <p class="movie__year">${year}</p>
+            <p class="movie__genre">${genres.join(', ')}</p>
+        </div>
+    `;
+};
+
+const MovieList = (items) => {
+    document.querySelector('#movies').innerHTML = items.map((item) => {
+        return Movie(item);
+    })
+}
 
 fetch(
     'https://apps.kodim.cz/daweb/trening-api/apis/movie-api/movies')
     .then((resp) => resp.json())
-    .then((data) => { 
-        let movies = [];
-        movies = data;
+    .then((data) => MovieList(data));
 
-        const movieList = document.querySelector('#movies');
-
-        const showMovies = () => {
-            movies.forEach((movie) => {
-
-                const Movie = ({id, title, url, posterUrl, genres, year }) => {
-                    return `
-                        <div class="movie">
-                            <img class="movie__img" src="${posterUrl}" alt="${title}">
-                            <h2 class="movie__title"> <a href="${url}"> ${title} </a></h2>
-                            <p class="movie__year">${year}</p>
-                            <p class="movie__genre">${genres.join(', ')}</p>
-                        </div>
-                    `;
-                };
-
-            movieList.innerHTML = movies.map((item) => {
-                return Movie(item)}
-                )
-            })
-        }
-
-
-        showMovies();
-    });
-
-
-// const Movie = {
-        //     id: data.id,
-        //     title: data.title,
-        //     url: data.url,
-        //     posterUrl: data.posterUrl,
-        //     year: data.year
-        // }
-        // console.log(Movie);
