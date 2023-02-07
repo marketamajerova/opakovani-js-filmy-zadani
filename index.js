@@ -14,7 +14,21 @@ const Movie = ({id, title, url, posterUrl, genres, year }) => {
 };
 
 const MovieList = (items) => {
+    items.sort((a,b) => {
+        const nameA = a.title.toUpperCase(); // ignore upper and lowercase
+        const nameB = b.title.toUpperCase(); // ignore upper and lowercase
+        
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+    })
+
+
     document.querySelector('#movies').innerHTML = items.map((item) => {
+        
         return Movie(item);
     })
 }
