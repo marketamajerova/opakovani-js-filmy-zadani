@@ -1,8 +1,5 @@
 'use strict';
 
-console.log('JavaScript ve stránce funguje');
-
-
 fetch(
     'https://apps.kodim.cz/daweb/trening-api/apis/movie-api/movies')
     .then((resp) => resp.json())
@@ -10,8 +7,8 @@ fetch(
         let movies = [];
         movies = data;
         movies.sort((a ,b) => {
-            const nameA = a.title.toUpperCase(); // ignore upper and lowercase
-            const nameB = b.title.toUpperCase(); // ignore upper and lowercase
+            const nameA = a.title.toUpperCase(); 
+            const nameB = b.title.toUpperCase(); 
             if (nameA < nameB) {
                 return -1;
             }
@@ -41,17 +38,47 @@ fetch(
                 )
             })
         }
-
-
         showMovies();
+
+        const buttonAsc = document.getElementById('a-z');
+        const buttonDesc = document.getElementById('z-a');
+
+        //funkce na serazeni filmu podle roku vydani vzestupne
+        const sortAsc = () => {
+
+            data.sort((a,b) => {
+                const nameA = a.year; 
+                const nameB = b.year; 
+
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+            })
+            showMovies();
+        }
+        
+        //funkce na serazeni filmu podle roku vydani sestupne
+        const sortDesc = () => {
+
+            data.sort((a,b) => {
+                const nameA = a.year; 
+                const nameB = b.year; 
+
+                if (nameA > nameB) {
+                    return -1;
+                }
+                if (nameA < nameB) {
+                    return 1;
+                }
+            })
+            showMovies();
+        }
+
+
+    buttonAsc.addEventListener('click', sortAsc);
+    buttonDesc.addEventListener('click', sortDesc);
+
     });
-
-
-// const Movie = {
-        //     id: data.id,
-        //     title: data.title,
-        //     url: data.url,
-        //     posterUrl: data.posterUrl,
-        //     year: data.year
-        // }
-        // console.log(Movie);
