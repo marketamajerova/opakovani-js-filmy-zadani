@@ -53,3 +53,8 @@ h1 {
   font-size: 0.8rem;
   font-style: italic;
 }
+
+button {
+  margin: 3px;
+  padding: 4px;
+}

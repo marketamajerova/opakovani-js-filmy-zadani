@@ -26,15 +26,34 @@ const MovieList = (items) => {
         }
     })
 
-
     document.querySelector('#movies').innerHTML = items.map((item) => {
         
         return Movie(item);
     })
+
+    const buttonAsc = document.getElementById('a-z');
+
+    // const sortAsc = () => {
+    //     console.log('tlacitko funguje')
+    //     items.sort((a,b) => {
+    //         const nameA = a.year; 
+    //         const nameB = b.year; 
+            
+    //         if (nameA < nameB) {
+    //             return -1;
+    //         }
+    //         if (nameA > nameB) {
+    //             return 1;
+    //         }
+    //     })
+    // }
+
+    buttonAsc.addEventListener('click', sortAsc);
 }
 
 fetch(
     'https://apps.kodim.cz/daweb/trening-api/apis/movie-api/movies')
     .then((resp) => resp.json())
     .then((data) => MovieList(data));
+
 
